@@ -1,16 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct TUPLEA *TUPLELISTA;
-struct TUPLEA {
-    int StudentId;
-    char Name[30];
-    char Address[50];
-    char Phone[8];
-    TUPLELISTA next;
-};
-typedef TUPLELISTA HASHTABLEA[1009];
-
 typedef struct TUPLEB *TUPLELISTB;
 struct TUPLEB {
     char Course[5];
@@ -36,13 +26,6 @@ struct TUPLED {
 };
 typedef TUPLELISTD HASHTABLED[197];
 
-typedef struct CSG *CSGLIST;
-struct CSG {
-    char Course[5];
-    int StudentId;
-    char Grade[2];
-    CSGLIST next;
-};
 CSGLIST initializeList() {
     CSGLIST first;
     CSGLIST second;
