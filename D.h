@@ -18,6 +18,7 @@ TUPLELISTD lookupD(TUPLELISTD);
 HASHTABLED tableD;
 void initTableD();
 void printTableD();
+void populateD();
 void tryD();
 
 #endif

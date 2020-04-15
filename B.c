@@ -128,7 +128,7 @@ void printTableB() {
     printf("\n");
 }
 
-void tryB() {
+void populateB() {
     insertB(newB("CS101", "CS100"));
     insertB(newB("EE200", "EE005"));
     insertB(newB("EE200", "CS100"));
@@ -137,6 +137,10 @@ void tryB() {
     insertB(newB("CS205", "CS101"));
     insertB(newB("CS206", "CS121"));
     insertB(newB("CS206", "CS205"));
+}
+
+void tryB() {
+    populateB();
     printTableB();
 
     printf("-----------\n");

@@ -130,13 +130,17 @@ void printTableCSG() {
     printf("\n");
 }
 
-void tryCSG() {
+void populateCSG() {
     insertCSG(newCSG("CS101", 12345, "A"));
     insertCSG(newCSG("CS101", 67890, "B"));
     insertCSG(newCSG("EE200", 12345, "C"));
     insertCSG(newCSG("EE200", 22222, "B+"));
     insertCSG(newCSG("CS101", 33333, "A-"));
     insertCSG(newCSG("PH100", 67890, "C+"));
+}
+
+void tryCSG() {
+    populateCSG();
     printTableCSG();
 
     printf("-----------------\n");

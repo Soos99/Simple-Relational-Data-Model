@@ -130,13 +130,17 @@ void printTableC() {
     printf("\n");
 }
 
-void tryC() {
+void populateC() {
     insertC(newC("CS101", "M", "9AM"));
     insertC(newC("CS101", "W", "9AM"));
     insertC(newC("CS101", "F", "9AM"));
     insertC(newC("EE200", "Tu", "10AM"));
     insertC(newC("EE200", "W", "1PM"));
     insertC(newC("EE200", "Th", "10AM"));
+}
+
+void tryC() {
+    populateC();
     printTableC();
 
     printf("-----------\n");

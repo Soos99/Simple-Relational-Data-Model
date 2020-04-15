@@ -19,6 +19,7 @@ TUPLELISTC lookupC(TUPLELISTC);
 HASHTABLEC tableC;
 void initTableC();
 void printTableC();
+void populateC();
 void tryC();
 
 #endif

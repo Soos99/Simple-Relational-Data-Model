@@ -19,6 +19,7 @@ CSGLIST lookupCSG(CSGLIST);
 HASHTABLECSG tableCSG;
 void initTableCSG();
 void printTableCSG();
+void populateCSG();
 void tryCSG();
 
 #endif

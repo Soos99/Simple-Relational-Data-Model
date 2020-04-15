@@ -128,10 +128,14 @@ void printTableD() {
     printf("\n");
 }
 
-void tryD() {
+void populateD() {
     insertD(newD("CS101", "Turing Aud."));
     insertD(newD("EE200", "25 Ohm Hall"));
     insertD(newD("PH100", "Newton Lab."));
+}
+
+void tryD() {
+    populateD();
     printTableD();
 
     printf("-----------\n");

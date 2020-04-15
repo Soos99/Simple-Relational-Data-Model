@@ -20,6 +20,7 @@ TUPLELISTA lookupA(TUPLELISTA);
 HASHTABLEA tableA;
 void initTableA();
 void printTableA();
+void populateA();
 void tryA();
 
 #endif

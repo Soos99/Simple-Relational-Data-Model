@@ -18,6 +18,7 @@ TUPLELISTB lookupB(TUPLELISTB);
 HASHTABLEB tableB;
 void initTableB();
 void printTableB();
+void populateB();
 void tryB();
 
 #endif

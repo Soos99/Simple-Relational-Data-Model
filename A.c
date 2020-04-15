@@ -132,10 +132,14 @@ void printTableA() {
     printf("\n");
 }
 
-void tryA() {
+void populateA() {
     insertA(newA(12345, "C. Brown", "12 Apple St.", "555-1234"));
     insertA(newA(67890, "L. Van Pelt", "34 Pear Ave.", "555-5678"));
     insertA(newA(22222, "P. Patty", "56 Grape Blvd.", "555-9999"));
+}
+
+void tryA() {
+    populateA();
     printTableA();
 
     printf("------\n");
