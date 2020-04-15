@@ -115,6 +115,7 @@ void initTableCSG() {
 }
 
 void printTableCSG() {
+    printf("\nPrinting table CSG:\n");
     for (int i = 0; i < sizeCSG; i++) {
         if (tableCSG[i] != NULL) {
             printf("%d ", i);
@@ -126,9 +127,10 @@ void printTableCSG() {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
-int main() {
+void tryCSG() {
     insertCSG(newCSG("CS101", 12345, "A"));
     insertCSG(newCSG("CS101", 67890, "B"));
     insertCSG(newCSG("EE200", 12345, "C"));
@@ -152,6 +154,4 @@ int main() {
     printf("-----------------\n");
     deleteCSG(newCSG("CS101", 0, "*"));
     printTableCSG();
-
-    return 0;
 }

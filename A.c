@@ -117,6 +117,7 @@ void initTableA() {
 }
 
 void printTableA() {
+    printf("\nPrinting table A:\n");
     for (int i = 0; i < sizeA; i++) {
         if (tableA[i] != NULL) {
             printf("%d ", i);
@@ -128,9 +129,10 @@ void printTableA() {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
-int main() {
+void tryA() {
     insertA(newA(12345, "C. Brown", "12 Apple St.", "555-1234"));
     insertA(newA(67890, "L. Van Pelt", "34 Pear Ave.", "555-5678"));
     insertA(newA(22222, "P. Patty", "56 Grape Blvd.", "555-9999"));
@@ -147,6 +149,4 @@ int main() {
     printf("------\n");
     deleteA(newA(12345, "*", "*", "*"));
     printTableA();
-
-    return 0;
 }

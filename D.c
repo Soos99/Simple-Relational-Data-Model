@@ -113,6 +113,7 @@ void initTableD() {
 }
 
 void printTableD() {
+    printf("\nPrinting table D:\n");
     for (int i = 0; i < sizeD; i++) {
         if (tableD[i] != NULL) {
             printf("%d ", i);
@@ -124,9 +125,10 @@ void printTableD() {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
-int main() {
+void tryD() {
     insertD(newD("CS101", "Turing Aud."));
     insertD(newD("EE200", "25 Ohm Hall"));
     insertD(newD("PH100", "Newton Lab."));
@@ -144,6 +146,4 @@ int main() {
     printf("-----------\n");
     deleteD(newD("CS101", "*"));
     printTableD();
-
-    return 0;
 }

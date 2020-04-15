@@ -113,6 +113,7 @@ void initTableB() {
 }
 
 void printTableB() {
+    printf("\nPrinting table B:\n");
     for (int i = 0; i < sizeB; i++) {
         if (tableB[i] != NULL) {
             printf("%d ", i);
@@ -124,9 +125,10 @@ void printTableB() {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
-int main() {
+void tryB() {
     insertB(newB("CS101", "CS100"));
     insertB(newB("EE200", "EE005"));
     insertB(newB("EE200", "CS100"));
@@ -149,6 +151,4 @@ int main() {
     printf("-----------\n");
     deleteB(newB("CS101", "*"));
     printTableB();
-
-    return 0;
 }

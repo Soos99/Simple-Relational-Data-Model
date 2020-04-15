@@ -115,6 +115,7 @@ void initTableC() {
 }
 
 void printTableC() {
+    printf("\nPrinting table C:\n");
     for (int i = 0; i < sizeC; i++) {
         if (tableC[i] != NULL) {
             printf("%d ", i);
@@ -126,9 +127,10 @@ void printTableC() {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
-int main() {
+void tryC() {
     insertC(newC("CS101", "M", "9AM"));
     insertC(newC("CS101", "W", "9AM"));
     insertC(newC("CS101", "F", "9AM"));
@@ -149,6 +151,4 @@ int main() {
     printf("-----------\n");
     deleteC(newC("CS101", "*", "*"));
     printTableC();
-
-    return 0;
 }
