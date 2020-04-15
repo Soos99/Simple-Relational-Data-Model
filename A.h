@@ -19,5 +19,6 @@ void deleteA(TUPLELISTA);
 TUPLELISTA lookupA(TUPLELISTA);
 HASHTABLEA tableA;
 void initTableA();
+void printTableA();
 
 #endif

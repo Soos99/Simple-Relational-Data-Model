@@ -18,6 +18,7 @@ void deleteCSG(CSGLIST);
 CSGLIST lookupCSG(CSGLIST);
 HASHTABLECSG tableCSG;
 void initTableCSG();
+void printTableCSG();
 
 #endif
 

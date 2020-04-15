@@ -17,9 +17,9 @@ int hashA(TUPLELISTA tuple) {
 
 bool areEqualA(TUPLELISTA a, TUPLELISTA b) {
     if (a->StudentId == 0 || b->StudentId == 0 || a->StudentId == b->StudentId)
-        if (a->Name == "*" || b->Name == "*" || strcmp(a->Name, b->Name) == 0)
-            if (a->Address == "*" || b->Address == "*" || strcmp(a->Address, b->Address) == 0) 
-                if (a->Phone == "*" || b->Phone == "*" || strcmp(a->Phone, b->Phone) == 0) 
+        if (strcmp(a->Name, "*") == 0 || strcmp(b->Name, "*") == 0 || strcmp(a->Name, b->Name) == 0)
+            if (strcmp(a->Address, "*") == 0 || strcmp(b->Address, "*") == 0 || strcmp(a->Address, b->Address) == 0) 
+                if (strcmp(a->Phone, "*") == 0 || strcmp(b->Phone, "*") == 0 || strcmp(a->Phone, b->Phone) == 0) 
                     return true;
     return false;
 }
@@ -57,7 +57,7 @@ void deleteA(TUPLELISTA tuple) {
         while (item != NULL) {
             if (areEqualA(tuple, item)) {
                         // Found a item matched
-                        printf("Deleting tuple (%d, %s, %s, %s)\n", tuple->StudentId, tuple->Name, tuple->Address, tuple->Phone);
+                        printf("Deleting tuple (%d, %s, %s, %s)\n", item->StudentId, item->Name, item->Address, item->Phone);
                         if (last == NULL) {
                             tableA[index] = item->next;
                             free(item);
@@ -116,10 +116,37 @@ void initTableA() {
         tableA[i] = NULL;
 }
 
+void printTableA() {
+    for (int i = 0; i < sizeA; i++) {
+        if (tableA[i] != NULL) {
+            printf("%d ", i);
+            TUPLELISTA item = tableA[i];
+            while (item != NULL) {
+                printf("(%d, %s, %s, %s) ", item->StudentId, item->Name, item->Address, item->Phone);
+                item = item->next;
+            }
+            printf("\n");
+        }
+    }
+}
+
 int main() {
     insertA(newA(12345, "C. Brown", "12 Apple St.", "555-1234"));
     insertA(newA(67890, "L. Van Pelt", "34 Pear Ave.", "555-5678"));
     insertA(newA(22222, "P. Patty", "56 Grape Blvd.", "555-9999"));
+    printTableA();
+
+    printf("------\n");
+    TUPLELISTA item = lookupA(newA(12345, "*", "*", "*"));
+    while (item != NULL) {
+        printf("(%d, %s, %s, %s) ", item->StudentId, item->Name, item->Address, item->Phone);
+        item = item->next;
+    }
+    printf("\n");
+
+    printf("------\n");
+    deleteA(newA(12345, "*", "*", "*"));
+    printTableA();
 
     return 0;
 }

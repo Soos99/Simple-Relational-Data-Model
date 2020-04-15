@@ -16,9 +16,9 @@ int hashCSG(CSGLIST tuple) {
 }
 
 bool areEqualCSG(CSGLIST a, CSGLIST b) {
-    if (a->Course == "*" || b->Course == "*" || strcmp(a->Course, b->Course) == 0)
+    if (strcmp(a->Course, "*") == 0 || strcmp(b->Course, "*") == 0 || strcmp(a->Course, b->Course) == 0) 
         if (a->StudentId == 0 || b->StudentId == 0 || a->StudentId == b->StudentId)
-            if (a->Grade == "*" || b->Grade == "*" || strcmp(a->Grade, b->Grade) == 0) 
+            if (strcmp(a->Grade, "*") == 0 || strcmp(b->Grade, "*") == 0 || strcmp(a->Grade, b->Grade) == 0) 
                 return true;
     return false;
 }
@@ -114,6 +114,20 @@ void initTableCSG() {
         tableCSG[i] = NULL;
 }
 
+void printTableCSG() {
+    for (int i = 0; i < sizeCSG; i++) {
+        if (tableCSG[i] != NULL) {
+            printf("%d ", i);
+            CSGLIST item = tableCSG[i];
+            while (item != NULL) {
+                printf("(%s, %d, %s) ", item->Course, item->StudentId, item->Grade);
+                item = item->next;
+            }
+            printf("\n");
+        }
+    }
+}
+
 int main() {
     insertCSG(newCSG("CS101", 12345, "A"));
     insertCSG(newCSG("CS101", 67890, "B"));
@@ -121,5 +135,23 @@ int main() {
     insertCSG(newCSG("EE200", 22222, "B+"));
     insertCSG(newCSG("CS101", 33333, "A-"));
     insertCSG(newCSG("PH100", 67890, "C+"));
+    printTableCSG();
+
+    printf("-----------------\n");
+    CSGLIST res = lookupCSG(newCSG("CS101", 0, "*"));
+    if (res == NULL) {
+        printf("Not found\n");
+    } else {
+        while (res != NULL) {
+            printf("(%s, %d, %s) ", res->Course, res->StudentId, res->Grade);
+            res = res->next;
+        }
+        printf("\n");
+    }
+
+    printf("-----------------\n");
+    deleteCSG(newCSG("CS101", 0, "*"));
+    printTableCSG();
+
     return 0;
 }
