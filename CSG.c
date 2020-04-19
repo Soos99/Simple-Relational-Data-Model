@@ -46,7 +46,7 @@ void insertCSG(CSGLIST tuple) {
 
 void deleteCSG(CSGLIST tuple) {
     if (lookupCSG(tuple) == NULL) {
-        printf("Error! Table CSG doesn't cotain tuple (%s, %d, %s)\n", tuple->Course, tuple->StudentId, tuple->Grade);
+        printf("Error! Table CSG doesn't contain tuple (%s, %d, %s)\n", tuple->Course, tuple->StudentId, tuple->Grade);
         return;
     }
 

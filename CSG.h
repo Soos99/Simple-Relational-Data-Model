@@ -17,6 +17,7 @@ void insertCSG(CSGLIST);
 void deleteCSG(CSGLIST);
 CSGLIST lookupCSG(CSGLIST);
 HASHTABLECSG tableCSG;
+bool areEqualCSG(CSGLIST a, CSGLIST b);
 void initTableCSG();
 void printTableCSG();
 void populateCSG();
