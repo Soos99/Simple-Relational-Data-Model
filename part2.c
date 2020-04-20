@@ -20,8 +20,10 @@ void findGradeFromStudentNameAndCourseName() {
         if (strcmp(StudentName, "quit") == 0)
             break;
 
-        TUPLELISTA resA = lookupA(newA(0, StudentName, "*", "*"));
+        TUPLELISTA toLookUpA = newA(0, StudentName, "*", "*");
+        TUPLELISTA resA = lookupA(toLookUpA);
         if (resA == NULL) {
+            freeA(toLookUpA);
             printf("Error! not find any student with the name %s\n", StudentName);
             continue;
         }
@@ -29,14 +31,21 @@ void findGradeFromStudentNameAndCourseName() {
         printf("Input for Course Name: ");
         scanf ("%[^\n]%*c", CourseName);
 
-
-        CSGLIST resCSG = lookupCSG(newCSG(CourseName, resA->StudentId, "*"));
+        CSGLIST toLookUpCSG = newCSG(CourseName, resA->StudentId, "*");
+        CSGLIST resCSG = lookupCSG(toLookUpCSG);
         if (resCSG == NULL) {
+            freeA(toLookUpA);
+            if (resA != NULL) free(resA);
+            freeCSG(toLookUpCSG);
             printf("Error! not find any grade of student %s in course %s\n", StudentName, CourseName);
             continue;
-        } 
+        }
 
         printf("%s got %s in %s\n", StudentName, resCSG->Grade, CourseName);
+        freeA(toLookUpA);
+        freeA(resA);
+        freeCSG(toLookUpCSG);
+        freeCSG(resCSG);
     }   
 }
 
@@ -53,12 +62,16 @@ void findPlaceFromStudentNameAndDayAndTime() {
         if (strcmp(StudentName, "quit") == 0)
             break;
 
-        TUPLELISTA resA = lookupA(newA(0, StudentName, "*", "*"));
+        TUPLELISTA toLookUpA = newA(0, StudentName, "*", "*");
+        TUPLELISTA resA = lookupA(toLookUpA);
         if (resA == NULL) {
+            freeA(toLookUpA);
             printf("Error! not find any student with the name %s\n", StudentName);
             continue;
         }
-        CSGLIST resCSG = lookupCSG(newCSG("*", resA->StudentId, "*"));
+
+        CSGLIST toLookUpCSG = newCSG("*", resA->StudentId, "*");
+        CSGLIST resCSG = lookupCSG(toLookUpCSG);
 
         printf("Input for Day: ");
         scanf ("%[^\n]%*c", Day);
@@ -68,23 +81,42 @@ void findPlaceFromStudentNameAndDayAndTime() {
 
         TUPLELISTC resC = NULL;
         for (CSGLIST item = resCSG; item != NULL; item = item->next) {
-            TUPLELISTC temp = lookupC(newC(item->Course, Day, Time));
+            TUPLELISTC toLookUpC = newC(item->Course, Day, Time);
+            TUPLELISTC temp = lookupC(toLookUpC);
             if (temp != NULL)
                 resC = temp;
+            freeC(toLookUpC);
         }
 
         if (resC == NULL) {
+            freeA(toLookUpA);
+            freeA(resA);
+            freeCSG(toLookUpCSG);
+            if (resCSG != NULL) freeCSG(resCSG);
             printf("Error! not find any course at %s on %s\n", Time, Day);
             continue;
         }
 
-        TUPLELISTD resD = lookupD(newD(resC->Course, "*"));
+        TUPLELISTD toLookUpD = newD(resC->Course, "*");
+        TUPLELISTD resD = lookupD(toLookUpD);
         if (resD == NULL) {
+            freeA(toLookUpA);
+            freeA(resA);
+            freeCSG(toLookUpCSG);
+            if (resCSG != NULL) freeCSG(resCSG);
+            freeD(toLookUpD);
             printf("Error! not find place of course %s\n", resC->Course);
             continue;
         }
 
         printf("%s is in %s at %s on %s\n", StudentName, resD->Room, Time, Day);
+        freeA(toLookUpA);
+        freeA(resA);
+        freeCSG(toLookUpCSG);
+        freeCSG(resCSG);
+        freeC(resC);
+        freeD(toLookUpD);
+        freeD(resD);
     }   
 }
 
@@ -97,6 +129,33 @@ int main() {
 
     findGradeFromStudentNameAndCourseName();
     findPlaceFromStudentNameAndDayAndTime();
+
+    //free populated tables
+    for (int i = 0; i < sizeA; i++) {
+        if (tableA[i] != NULL) {
+            freeA(tableA[i]);
+        }
+    }
+    for (int i = 0; i < sizeB; i++) {
+        if (tableB[i] != NULL) {
+            freeB(tableB[i]);
+        }
+    }
+    for (int i = 0; i < sizeC; i++) {
+        if (tableC[i] != NULL) {
+            freeC(tableC[i]);
+        }
+    }
+    for (int i = 0; i < sizeD; i++) {
+        if (tableD[i] != NULL) {
+            freeD(tableD[i]);
+        }
+    }
+    for (int i = 0; i < sizeCSG; i++) {
+        if (tableCSG[i] != NULL) {
+            freeCSG(tableCSG[i]);
+        }
+    }
 
     return 0;
 }
