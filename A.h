@@ -22,5 +22,6 @@ void initTableA();
 void printTableA();
 void populateA();
 void tryA();
+void freeA(TUPLELISTA);
 
 #endif

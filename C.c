@@ -45,7 +45,8 @@ void insertC(TUPLELISTC tuple) {
 }
 
 void deleteC(TUPLELISTC tuple) {
-    if (lookupC(tuple) == NULL) {
+    TUPLELISTC toLookUp = lookupC(tuple);
+    if (toLookUp == NULL) {
         printf("Error! Table A doesn't cotain tuple (%s, %s, %s)\n", tuple->Course, tuple->Day, tuple->Hour);
         return;
     }
@@ -59,12 +60,12 @@ void deleteC(TUPLELISTC tuple) {
                 printf("Deleting tuple (%s, %s, %s)\n", item->Course, item->Day, item->Hour);
                 if (last == NULL) {
                     tableC[index] = item->next;
-                    free(item);
+                    freeC(item);
                     item = tableC[index];
                     continue;
                 } else {
                     last->next = item->next;
-                    free(item);
+                    freeC(item);
                     item = last->next;
                     continue;
                 }
@@ -73,6 +74,7 @@ void deleteC(TUPLELISTC tuple) {
             item = item->next;
         }
     }
+    freeC(toLookUp);
 }
 
 TUPLELISTC lookupC(TUPLELISTC tuple) {
@@ -131,6 +133,7 @@ void printTableC() {
 }
 
 void populateC() {
+    printf("\nInitializing table C\n");
     insertC(newC("CS101", "M", "9AM"));
     insertC(newC("CS101", "W", "9AM"));
     insertC(newC("CS101", "F", "9AM"));
@@ -144,7 +147,9 @@ void tryC() {
     printTableC();
 
     printf("-----------\n");
-    TUPLELISTC item = lookupC(newC("CS101", "*", "*"));
+    TUPLELISTC toLookUp = newC("CS101", "*", "*");
+    TUPLELISTC item = lookupC(toLookUp);
+    TUPLELISTC copy = item;
     while (item != NULL) {
         printf("(%s, %s, %s) ", item->Course, item->Day, item->Hour);
         item = item->next;
@@ -153,6 +158,22 @@ void tryC() {
     
 
     printf("-----------\n");
-    deleteC(newC("CS101", "*", "*"));
+    TUPLELISTC toDelete = newC("CS101", "*", "*");
+    deleteC(toDelete);
     printTableC();
+
+    for (int i = 0; i < sizeC; i++) {
+        if (tableC[i] != NULL) {
+            freeC(tableC[i]);
+        }
+    }
+    if (copy != NULL) freeC(copy);
+    freeC(toDelete);
+    freeC(toLookUp);
+}
+
+void freeC(TUPLELISTC c){
+    if (c -> next)
+        freeC(c->next);
+    free(c);
 }

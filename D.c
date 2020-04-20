@@ -44,7 +44,8 @@ void insertD(TUPLELISTD tuple) {
 }
 
 void deleteD(TUPLELISTD tuple) {
-    if (lookupD(tuple) == NULL) {
+    TUPLELISTD toLookUp = lookupD(tuple);
+    if (toLookUp == NULL) {
         printf("Error! Table A doesn't cotain tuple (%s, %s)\n", tuple->Course, tuple->Room);
         return;
     }
@@ -58,12 +59,12 @@ void deleteD(TUPLELISTD tuple) {
                         printf("Deleting tuple (%s, %s)\n", item->Course, item->Room);
                         if (last == NULL) {
                             tableD[index] = item->next;
-                            free(item);
+                            freeD(item);
                             item = tableD[index];
                             continue;
                         } else {
                             last->next = item->next;
-                            free(item);
+                            freeD(item);
                             item = last->next;
                             continue;
                         }
@@ -72,6 +73,7 @@ void deleteD(TUPLELISTD tuple) {
             item = item->next;
         }
     }
+    freeD(toLookUp);
 }
 
 TUPLELISTD lookupD(TUPLELISTD tuple) {
@@ -129,6 +131,7 @@ void printTableD() {
 }
 
 void populateD() {
+    printf("\nInitializing table D\n");
     insertD(newD("CS101", "Turing Aud."));
     insertD(newD("EE200", "25 Ohm Hall"));
     insertD(newD("PH100", "Newton Lab."));
@@ -139,7 +142,9 @@ void tryD() {
     printTableD();
 
     printf("-----------\n");
-    TUPLELISTD item = lookupD(newD("CS101", "*"));
+    TUPLELISTD toLookUp = newD("CS101", "*");
+    TUPLELISTD item = lookupD(toLookUp);
+    TUPLELISTD copy = item;
     while (item != NULL) {
         printf("(%s, %s) ", item->Course, item->Room);
         item = item->next;
@@ -148,6 +153,22 @@ void tryD() {
     
 
     printf("-----------\n");
-    deleteD(newD("CS101", "*"));
+    TUPLELISTD toDelete = newD("CS101", "*");
+    deleteD(toDelete);
     printTableD();
+
+    for (int i = 0; i < sizeD; i++) {
+        if (tableD[i] != NULL) {
+            freeD(tableD[i]);
+        }
+    }
+    if (copy != NULL) freeD(copy);
+    freeD(toDelete);
+    freeD(toLookUp);
+}
+
+void freeD(TUPLELISTD d){
+    if (d->next)
+        freeD(d->next);
+    free(d);
 }

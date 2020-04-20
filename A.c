@@ -46,7 +46,8 @@ void insertA(TUPLELISTA tuple) {
 }
 
 void deleteA(TUPLELISTA tuple) {
-    if (lookupA(tuple) == NULL) {
+    TUPLELISTA toLookUp = lookupA(tuple);
+    if (toLookUp == NULL) {
         printf("Error! Table A doesn't cotain tuple (%d, %s, %s, %s)\n", tuple->StudentId, tuple->Name, tuple->Address, tuple->Phone);
         return;
     }
@@ -60,12 +61,12 @@ void deleteA(TUPLELISTA tuple) {
                         printf("Deleting tuple (%d, %s, %s, %s)\n", item->StudentId, item->Name, item->Address, item->Phone);
                         if (last == NULL) {
                             tableA[index] = item->next;
-                            free(item);
+                            freeA(item);
                             item = tableA[index];
                             continue;
                         } else {
                             last->next = item->next;
-                            free(item);
+                            freeA(item);
                             item = last->next;
                             continue;
                         }
@@ -74,6 +75,7 @@ void deleteA(TUPLELISTA tuple) {
             item = item->next;
         }
     }
+    freeA(toLookUp);
 }
 
 TUPLELISTA lookupA(TUPLELISTA tuple) {
@@ -133,6 +135,7 @@ void printTableA() {
 }
 
 void populateA() {
+    printf("\nInitializing table A\n");
     insertA(newA(12345, "C. Brown", "12 Apple St.", "555-1234"));
     insertA(newA(67890, "L. Van Pelt", "34 Pear Ave.", "555-5678"));
     insertA(newA(22222, "P. Patty", "56 Grape Blvd.", "555-9999"));
@@ -143,7 +146,9 @@ void tryA() {
     printTableA();
 
     printf("------\n");
-    TUPLELISTA item = lookupA(newA(12345, "*", "*", "*"));
+    TUPLELISTA toLookUp = newA(12345, "*", "*", "*");
+    TUPLELISTA item = lookupA(toLookUp);
+    TUPLELISTA copy = item;
     while (item != NULL) {
         printf("(%d, %s, %s, %s) ", item->StudentId, item->Name, item->Address, item->Phone);
         item = item->next;
@@ -151,6 +156,21 @@ void tryA() {
     printf("\n");
 
     printf("------\n");
-    deleteA(newA(12345, "*", "*", "*"));
+    TUPLELISTA toDelete = newA(12345, "*", "*", "*");
+    deleteA(toDelete);
     printTableA();
+
+    for (int i = 0; i < sizeA; i++) {
+        if (tableA[i] != NULL) {
+            freeA(tableA[i]);
+        }
+    }
+    if (copy != NULL) freeA(copy);
+    freeA(toDelete);
+    freeA(toLookUp);
+}
+void freeA(TUPLELISTA a){
+    if (a->next)
+        freeA(a->next);
+    free(a);
 }

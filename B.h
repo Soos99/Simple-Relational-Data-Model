@@ -20,5 +20,6 @@ void initTableB();
 void printTableB();
 void populateB();
 void tryB();
+void freeB(TUPLELISTB);
 
 #endif

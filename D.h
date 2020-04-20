@@ -20,5 +20,6 @@ void initTableD();
 void printTableD();
 void populateD();
 void tryD();
+void freeD(TUPLELISTD);
 
 #endif

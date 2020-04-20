@@ -44,7 +44,8 @@ void insertB(TUPLELISTB tuple) {
 }
 
 void deleteB(TUPLELISTB tuple) {
-    if (lookupB(tuple) == NULL) {
+    TUPLELISTB toLookUp = lookupB(tuple);
+    if (toLookUp == NULL) {
         printf("Error! Table A doesn't cotain tuple (%s, %s)\n", tuple->Course, tuple->Prerequisite);
         return;
     }
@@ -58,12 +59,12 @@ void deleteB(TUPLELISTB tuple) {
                         printf("Deleting tuple (%s, %s)\n", item->Course, item->Prerequisite);
                         if (last == NULL) {
                             tableB[index] = item->next;
-                            free(item);
+                            freeB(item);
                             item = tableB[index];
                             continue;
                         } else {
                             last->next = item->next;
-                            free(item);
+                            freeB(item);
                             item = last->next;
                             continue;
                         }
@@ -72,6 +73,7 @@ void deleteB(TUPLELISTB tuple) {
             item = item->next;
         }
     }
+    freeB(toLookUp);
 }
 
 TUPLELISTB lookupB(TUPLELISTB tuple) {
@@ -129,6 +131,7 @@ void printTableB() {
 }
 
 void populateB() {
+    printf("\nInitializing table B\n");
     insertB(newB("CS101", "CS100"));
     insertB(newB("EE200", "EE005"));
     insertB(newB("EE200", "CS100"));
@@ -144,7 +147,9 @@ void tryB() {
     printTableB();
 
     printf("-----------\n");
-    TUPLELISTB item = lookupB(newB("CS101", "*"));
+    TUPLELISTB toLookUp = newB("CS101", "*");
+    TUPLELISTB item = lookupB(toLookUp);
+    TUPLELISTB copy = item;
     while (item != NULL) {
         printf("(%s, %s) ", item->Course, item->Prerequisite);
         item = item->next;
@@ -153,6 +158,22 @@ void tryB() {
     
 
     printf("-----------\n");
-    deleteB(newB("CS101", "*"));
+    TUPLELISTB toDelete = newB("CS101", "*");
+    deleteB(toDelete);
     printTableB();
+
+    for (int i = 0; i < sizeB; i++) {
+        if (tableB[i] != NULL) {
+            freeB(tableB[i]);
+        }
+    }
+    if (copy != NULL) freeB(copy);
+    freeB(toDelete);
+    freeB(toLookUp);
+}
+
+void freeB(TUPLELISTB b){
+    if (b->next)
+        freeB(b->next);
+    free(b);
 }

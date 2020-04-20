@@ -21,5 +21,6 @@ void initTableC();
 void printTableC();
 void populateC();
 void tryC();
+void freeC(TUPLELISTC);
 
 #endif
