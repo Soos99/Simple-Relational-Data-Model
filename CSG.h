@@ -1,5 +1,6 @@
 #ifndef CSG_h
 #define CSG_h
+#include <stdbool.h>
 
 #define sizeCSG 1009
 
@@ -22,7 +23,8 @@ void initTableCSG();
 void printTableCSG();
 void populateCSG();
 void tryCSG();
+void freeCSG(CSGLIST csg);
 
 #endif
 
-// INSERT and LOOKUP: for string, * = everything. And for int, 0 = everything
+// INSERT and DELETE: for string, * = everything. And for int, 0 = everything

@@ -45,7 +45,8 @@ void insertCSG(CSGLIST tuple) {
 }
 
 void deleteCSG(CSGLIST tuple) {
-    if (lookupCSG(tuple) == NULL) {
+    CSGLIST toLookUp = lookupCSG(tuple);
+    if (toLookUp == NULL) {
         printf("Error! Table CSG doesn't contain tuple (%s, %d, %s)\n", tuple->Course, tuple->StudentId, tuple->Grade);
         return;
     }
@@ -59,12 +60,12 @@ void deleteCSG(CSGLIST tuple) {
                         printf("Deleting tuple (%s, %d, %s)\n", item->Course, item->StudentId, item->Grade);
                         if (last == NULL) {
                             tableCSG[index] = item->next;
-                            free(item);
+                            freeCSG(item);
                             item = tableCSG[index];
                             continue;
                         } else {
                             last->next = item->next;
-                            free(item);
+                            freeCSG(item);
                             item = last->next;
                             continue;
                         }
@@ -73,6 +74,7 @@ void deleteCSG(CSGLIST tuple) {
             item = item->next;
         }
     }
+    freeCSG(toLookUp);
 }
 
 CSGLIST lookupCSG(CSGLIST tuple) {
@@ -131,6 +133,7 @@ void printTableCSG() {
 }
 
 void populateCSG() {
+    printf("\nInitializing table CSG\n");
     insertCSG(newCSG("CS101", 12345, "A"));
     insertCSG(newCSG("CS101", 67890, "B"));
     insertCSG(newCSG("EE200", 12345, "C"));
@@ -144,7 +147,9 @@ void tryCSG() {
     printTableCSG();
 
     printf("-----------------\n");
-    CSGLIST res = lookupCSG(newCSG("CS101", 0, "*"));
+    CSGLIST toLookUp = newCSG("CS101", 0, "*");
+    CSGLIST res = lookupCSG(toLookUp);
+    CSGLIST copy = res;
     if (res == NULL) {
         printf("Not found\n");
     } else {
@@ -156,6 +161,22 @@ void tryCSG() {
     }
 
     printf("-----------------\n");
-    deleteCSG(newCSG("CS101", 0, "*"));
+    CSGLIST toDelete = newCSG("CS101", 0, "*");
+    deleteCSG(toDelete);
     printTableCSG();
+
+    for (int i = 0; i < sizeCSG; i++) {
+        if (tableCSG[i] != NULL) {
+            freeCSG(tableCSG[i]);
+        }
+    }
+    if (copy != NULL) freeCSG(copy);
+    freeCSG(toDelete);
+    freeCSG(toLookUp);
+}
+
+void freeCSG(CSGLIST csg){
+    if (csg->next)
+        freeCSG(csg->next);
+    free(csg);
 }
