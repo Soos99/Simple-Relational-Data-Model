@@ -1,5 +1,5 @@
 # Simple-Relational-Data-Model
-Simple relational data models with CRUD operations and supported features for interactions among relations (querying/joining). Sample data was taken from the book "The Foundations of Computer Science"
+Simple relational data models with CRUD operations and supported features for interactions among relations (querying/joining). Sample data was taken from the book ["The Foundations of Computer Science"](http://infolab.stanford.edu/~ullman/focs.html)
 
 ## Relation Schema
 #### 1. Table A
@@ -32,6 +32,26 @@ Course | StudentId | Grade
 #### 3. Selection, Projection, Join Relations (Part 3)
 - Joining table C and D (table CD) 
 - Data structures QueryCSG and QueryCD for querying data from joined table CD and table CSG
+#### 4. Check for memory leak
+- Tool: [Valgrind](https://valgrind.org/) for detection and debugging
+
+## Running Instructions
+#### 1. Install [Make](https://www.gnu.org/software/make/) and [Valgrind](https://valgrind.org/)
+#### 2. Part 1 (Insert, Lookup, Delete operations)
+```
+$ make part1
+$ ./part1
+```
+#### 3. Part 2 (Retrieve Data)
+```
+$ make part2
+$ ./part2
+```
+#### 4. Part 3 (Selection, Projection, Join Relations)
+```
+$ make part 3
+$ ./part3
+```
 
 ## Contributors
 1. [Hoang Le](https://github.com/Soos99)
