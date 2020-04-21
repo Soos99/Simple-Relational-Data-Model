@@ -52,6 +52,10 @@ $ ./part2
 $ make part 3
 $ ./part3
 ```
+#### 5. Clean object files
+```
+$ make clean
+```
 
 ## Contributors
 1. [Hoang Le](https://github.com/Soos99)
