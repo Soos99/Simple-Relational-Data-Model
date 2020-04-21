@@ -1,6 +1,6 @@
 #ifndef QueryCSG_h
 #define QueryCSG_h
-#include "CSG.h"
+#include "../Hashtable/CSG.h"
 
 struct ListCSG {
     CSGLIST result[sizeCSG];

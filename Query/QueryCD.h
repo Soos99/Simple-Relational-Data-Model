@@ -1,6 +1,6 @@
 #ifndef QueryCD_h
 #define QueryCD_h
-#include "CD.h"
+#include "../Hashtable/CD.h"
 
 
 struct ListTableCD {

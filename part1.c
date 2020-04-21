@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "CSG.h"
-#include "A.h"
-#include "B.h"
-#include "C.h"
-#include "D.h"
+#include "./Hashtable/CSG.h"
+#include "./Hashtable/A.h"
+#include "./Hashtable/B.h"
+#include "./Hashtable/C.h"
+#include "./Hashtable/D.h"
 
 int main() {
     printf("\t\t\t\t\t\tTRY TABLE CSG:\n");

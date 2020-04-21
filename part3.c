@@ -3,12 +3,12 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "CSG.h"
-#include "C.h"
-#include "D.h"
-#include "QueryCSG.h"
-#include "QueryCD.h"
-#include "CD.h"
+#include "./Hashtable/CSG.h"
+#include "./Hashtable/C.h"
+#include "./Hashtable/D.h"
+#include "./Query/QueryCSG.h"
+#include "./Query/QueryCD.h"
+#include "./Hashtable/CD.h"
 #define sizeCD 1009
 
 int main() {

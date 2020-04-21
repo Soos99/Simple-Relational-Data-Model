@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "CSG.h"
+#include "../Hashtable/CSG.h"
 #include "QueryCSG.h"
 
 QueryCSG newQueryCSG(){

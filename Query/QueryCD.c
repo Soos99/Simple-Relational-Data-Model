@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "CD.h"
+#include "../Hashtable/CD.h"
 #include "QueryCD.h"
 
 QueryCD newQueryCD(){
